@@ -1,9 +1,18 @@
 import React, { Component } from "react";
+import Header from "../components/nav";
+import UserCard from "../components/UserCard";
 
 class Leaderboard extends Component {
     render() {
         return (
-            <div>Leaderboard</div>
+            <>
+                <Header />
+                <UserCard />
+                <UserCard />
+                <UserCard />
+                <UserCard />
+                <UserCard />
+            </>
         )
     }
 }
