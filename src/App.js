@@ -6,7 +6,7 @@ import Leaderboard from './screens/Leaderboard';
 function App() {
   return (
     <div className="App">
-      <Leaderboard />
+      <Home />
     </div>
   );
 }

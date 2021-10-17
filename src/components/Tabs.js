@@ -5,7 +5,8 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Question from "../components/Question"
-
+import AnsweredQuestion from './answeredQuestion';
+import QuestionDetails from './QuestionDetails'
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -57,10 +58,10 @@ export default function BasicTabs() {
             </Box>
             <TabPanel value={value} index={0}>
                 <Question />
-
+                <QuestionDetails />
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <Question />
+                <AnsweredQuestion />
             </TabPanel>
         </Box>
     );
