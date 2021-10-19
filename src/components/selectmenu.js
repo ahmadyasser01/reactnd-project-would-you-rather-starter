@@ -4,6 +4,8 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { connect } from 'react-redux';
+
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -38,7 +40,8 @@ function getStyles(name, personName, theme) {
     };
 }
 
-export default function SelectUser() {
+function SelectUser({ users }) {
+    console.log("users are from login select user", users);
     const theme = useTheme();
     const [personName, setPersonName] = React.useState([]);
 
@@ -56,14 +59,13 @@ export default function SelectUser() {
         <div>
             <FormControl sx={{ m: 1, width: 300, mt: 3 }}>
                 <Select
-                    multiple
                     displayEmpty
                     value={personName}
                     onChange={handleChange}
                     input={<OutlinedInput />}
                     renderValue={(selected) => {
                         if (selected.length === 0) {
-                            return <em>Placeholder</em>;
+                            return <em>Select user</em>;
                         }
 
                         return selected.join(', ');
@@ -72,15 +74,15 @@ export default function SelectUser() {
                     inputProps={{ 'aria-label': 'Without label' }}
                 >
                     <MenuItem disabled value="">
-                        <em>Placeholder</em>
+                        <em>Users</em>
                     </MenuItem>
-                    {names.map((name) => (
+                    {users.map((usr) => (
                         <MenuItem
-                            key={name}
-                            value={name}
-                            style={getStyles(name, personName, theme)}
+                            key={usr}
+                            value={usr}
+                            style={getStyles(usr, personName, theme)}
                         >
-                            {name}
+                            {usr}
                         </MenuItem>
                     ))}
                 </Select>
@@ -88,3 +90,9 @@ export default function SelectUser() {
         </div>
     );
 }
+function mapStateToProps({ users }) {
+    return {
+        users: Object.keys(users)
+    }
+}
+export default connect(mapStateToProps)(SelectUser)

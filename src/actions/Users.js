@@ -23,6 +23,6 @@ export function userAddQuestion({ authedUser, qid }) {
     return {
         type: USER_ADD_QUESTION,
         authedUser,
-        questionId
+        questionId: qid
     }
 }

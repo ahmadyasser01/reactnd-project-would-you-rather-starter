@@ -1,17 +1,28 @@
-import { _getQuestions, _getUsers } from "../utils/_DATA";
+
+import { recieveQuestions } from "./Questions";
+import { recieveUsers } from "./Users";
+import { setAuthedUser } from "./authedUser";
+import { getInitialData } from "../utils/api";
+import { showLoading, hideLoading } from 'react-redux-loading'
+
+const AUTHED_ID = 'sarahedo'
 
 
-const AUTHED_ID = 'tylermcginnis'
 
-
-
-const getInitialData = async () => {
+export const handleInitialData = () => {
     return (dispatch) => {
-        const users = await _getUsers();
-        const questions = await _getQuestions();
+        dispatch(showLoading())
+        return getInitialData()
+            .then(({ users, questions }) => {
+                console.log("usrs from handling", users);
+                dispatch(recieveUsers(users))
+                dispatch(recieveQuestions(questions))
+                dispatch(setAuthedUser(AUTHED_ID))
+                dispatch(hideLoading())
 
-        dispatch(users)
-        dispatch(questions)
-        dispatch(setAuthedUser(AUTHED_ID))
+            }).catch(err => {
+                console.log(err);
+            })
+
     }
 }

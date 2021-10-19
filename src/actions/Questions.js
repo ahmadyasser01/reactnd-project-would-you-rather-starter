@@ -4,22 +4,26 @@ export const ADD_QUESTION = 'ADD_QUESTION'
 
 
 
-export function recieveQuestions(Questions) {
+export function recieveQuestions(questions) {
     return {
         type: RECIEVE_QUESTIONS,
-        Questions
+        questions
     }
 }
 
 export function answerQuestion({ questionId, answer, authedUser }) {
-    type: ANSWER_QUESTION,
+    return {
+        ANSWER_QUESTION,
         authedUser,
         questionId,
         answer
+    }
 }
 
 export function addQuestion(question) {
-    type: ADD_QUESTION,
+    return {
+        ADD_QUESTION,
         question
+    }
 }
 

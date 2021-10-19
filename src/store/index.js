@@ -1,7 +1,6 @@
-import React from "react";
 import { createStore } from "redux";
-import reducer from '../reducers'
-import middleware from "../middleware";
+import mainReducer from '../reducers'
+import allMiddleware from '../middleware'
 
-const store = createStore(reducer, middleware);
+const store = createStore(mainReducer, allMiddleware);
 export default store;
