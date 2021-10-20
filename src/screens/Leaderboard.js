@@ -3,6 +3,7 @@ import Header from "../components/nav";
 import UserCard from "../components/UserCard";
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
+import sortBy from "sort-by";
 
 class Leaderboard extends Component {
     componentDidMount() {
@@ -14,11 +15,29 @@ class Leaderboard extends Component {
         return (
             <>
                 <Header />
-                {users.map(usr => (
-                    <UserCard name={usr.name} />
-                )
 
-                )}
+                {users.map(usr => {
+                    const answeredQuestions = Object.keys(usr.answers).length;
+                    const askedQuestions = Object.keys(usr.questions).length;
+                    const score = answeredQuestions + askedQuestions
+
+
+                    return (
+                        {
+                            ...usr,
+                            score,
+                            answeredQuestions,
+                            askedQuestions
+                        }
+                    )
+                }
+
+
+                ).sort(sortBy('-score')).map(usr => (
+                    <UserCard user={usr} />
+                ))
+
+                }
 
             </>
         )

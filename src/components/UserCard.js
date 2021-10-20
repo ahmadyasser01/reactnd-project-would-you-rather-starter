@@ -6,7 +6,8 @@ import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import TextField from '@mui/material/TextField';
 
-export default function UserCard({ name }) {
+export default function UserCard({ user }) {
+    console.log(user)
     return (
         <Card sx={{ maxWidth: 345 }}>
             <CardActionArea>
@@ -18,20 +19,20 @@ export default function UserCard({ name }) {
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                        {name}
+                        {user.name}
                     </Typography>
                     <Typography variant="h6" color="text">
-                        Answered Questions:<span>1</span>
+                        Answered Questions:<span>{user.answeredQuestions}</span>
                     </Typography>
                     <Typography variant="h6" color="text">
-                        Asked Questions:<span>1</span>
+                        Asked Questions:<span>{user.askedQuestions}</span>
                     </Typography>
                     <Typography variant="h6" color="text">
-                        Score:<span>2</span>
+                        Score:<span>{user.score}</span>
                     </Typography>
                 </CardContent>
             </CardActionArea>
 
-        </Card>
+        </Card >
     );
 }
