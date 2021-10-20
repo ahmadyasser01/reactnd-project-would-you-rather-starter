@@ -13,7 +13,7 @@ export function recieveQuestions(questions) {
 
 export function answerQuestion({ questionId, answer, authedUser }) {
     return {
-        ANSWER_QUESTION,
+        type: ANSWER_QUESTION,
         authedUser,
         questionId,
         answer
@@ -22,8 +22,7 @@ export function answerQuestion({ questionId, answer, authedUser }) {
 
 export function addQuestion(question) {
     return {
-        ADD_QUESTION,
+        type: ADD_QUESTION,
         question
     }
 }
-

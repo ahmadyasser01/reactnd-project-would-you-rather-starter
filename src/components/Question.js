@@ -4,31 +4,38 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
+import RadioButtonsGroup from '../components/RadioOptions'
 class Question extends Component {
     render() {
+        const { id, avatarURL, author, optionOne, optionTwo } = this.props.question
+        console.log(this.props, "5raaaaaaaaaaaaa props");
+
         return (
             <div>
                 <Card sx={{ maxWidth: 500 }}>
                     <CardActionArea>
-                        <CardMedia
+                        {/* <CardMedia
                             component="img"
                             height="140"
                             image="/static/images/cards/contemplative-reptile.jpg"
                             alt="green iguana"
-                        />
+                        /> */}
                         <CardContent>
                             <Typography gutterBottom variant="h5" component="div">
-                                Lizard
+                                {author} asks  Would You Rather?
                             </Typography>
-                            <Typography variant="body2" color="text.secondary">
-                                Lizards are a widespread group of squamate reptiles, with over 6,000
-                                species, ranging across all continents except Antarctica
+                            <Typography gutterBottom variant="small" component="div">
+                                {optionOne.text}
+                            </Typography>
+                            <Typography gutterBottom variant="small" component="div">
+                                {optionTwo.text}
                             </Typography>
                         </CardContent>
+
                     </CardActionArea>
                     <CardActions>
                         <Button size="small" color="primary">
-                            Share
+                            View Poll
                         </Button>
                     </CardActions>
                 </Card>

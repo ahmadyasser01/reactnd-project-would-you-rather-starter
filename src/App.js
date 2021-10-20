@@ -2,13 +2,15 @@ import './App.css';
 import Login from './screens/Login'
 // import Home from './screens/Home'
 // import Newquestion from './screens/NewQuestion';
-// import Leaderboard from './screens/Leaderboard';
+import Leaderboard from './screens/Leaderboard';
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { handleInitialData } from './actions/shared'
 import LoadingBar from 'react-redux-loading'
 import authedUser from './reducers/authedUser';
-
+import Home from './screens/Home';
+import Newquestion from './screens/NewQuestion'
+// import { Leaderboard } from '@mui/icons-material';
 class App extends Component {
 
   componentDidMount() {
@@ -24,7 +26,7 @@ class App extends Component {
         <LoadingBar />
         {this.props.loading === true
           ? null
-          : <Login />}
+          : <Leaderboard />}
 
       </div>
     );

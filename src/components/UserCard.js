@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import TextField from '@mui/material/TextField';
 
-export default function UserCard() {
+export default function UserCard({ name }) {
     return (
         <Card sx={{ maxWidth: 345 }}>
             <CardActionArea>
@@ -18,7 +18,7 @@ export default function UserCard() {
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                        Name
+                        {name}
                     </Typography>
                     <Typography variant="h6" color="text">
                         Answered Questions:<span>1</span>

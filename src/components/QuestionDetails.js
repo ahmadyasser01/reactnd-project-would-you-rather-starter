@@ -6,7 +6,10 @@ import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import RadioButtonsGroup from '../components/RadioOptions'
-export default function NewQuestionCard() {
+export default function QuestionDetails({ id, avatarURL, author, optionOne, optionTwo }) {
+
+
+    console.log(optionOne, "from qdetails");
     return (
         <Card sx={{ maxWidth: 345 }}>
             <CardActionArea>
@@ -18,20 +21,19 @@ export default function NewQuestionCard() {
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                        Create New Question
-                    </Typography>
+                        Answer New Question                    </Typography>
                     <Typography variant="h6" color="text">
                         Would You Rather?
                     </Typography>
                     <TextField id="standard-basic" label="Option 1" variant="standard" />
                     <TextField id="standard-basic" label="Option 2" variant="standard" />
-                    <RadioButtonsGroup />
+                    <RadioButtonsGroup options={[optionOne, optionTwo]} />
 
                 </CardContent>
             </CardActionArea>
             <CardActions>
                 <Button size="Large" color="primary" >
-                    Create
+                    Submit
                 </Button>
             </CardActions>
         </Card>

@@ -7,6 +7,8 @@ import Box from '@mui/material/Box';
 import Question from "../components/Question"
 import AnsweredQuestion from './answeredQuestion';
 import QuestionDetails from './QuestionDetails'
+import { connect } from 'react-redux';
+import sortBy from 'sort-by';
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -39,8 +41,20 @@ function a11yProps(index) {
         'aria-controls': `simple-tabpanel-${index}`,
     };
 }
-
-export default function BasicTabs() {
+// const formatQuestions = (questionsIds) =>
+//     questionsIds
+//         .map((questionId) => ({
+//             author: this.props.questions[questionId].author,
+//             id: questionId,
+//             optionOne: this.props.questions[questionId].optionOne,
+//             optionTwo: this.props.questions[questionId].optionTwo,
+//             timestamp: this.props.questions[questionId].timestamp,
+//             avatarURL: this.props.users[this.props.questions[questionId].author]
+//                 .avatarURL,
+//         }))
+//         .sort(sortBy('-timestamp'))
+function BasicTabs({ unAnsweredQuestions, answeredQuestions }) {
+    console.log(unAnsweredQuestions, answeredQuestions);
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event, newValue) => {
@@ -57,12 +71,26 @@ export default function BasicTabs() {
                 </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
-                <Question />
-                <QuestionDetails />
+                {unAnsweredQuestions && unAnsweredQuestions.map(q => (
+
+                    <Question question={q} />
+                ))}
+
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <AnsweredQuestion />
+                {answeredQuestions && answeredQuestions.map(q => (
+
+                    <Question question={q} />
+                ))}
+
             </TabPanel>
         </Box>
     );
 }
+function mapStateToProps({ questions }) {
+    return {
+        questions: Object.values(questions)
+    }
+
+}
+export default connect(mapStateToProps)(BasicTabs)
