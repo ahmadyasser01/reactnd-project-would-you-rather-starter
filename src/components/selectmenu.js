@@ -5,6 +5,8 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { connect } from 'react-redux';
+import { setAuthedUser } from "../actions/authedUser";
+
 
 
 const ITEM_HEIGHT = 48;
@@ -31,28 +33,24 @@ const names = [
     'Kelly Snyder',
 ];
 
-function getStyles(name, personName, theme) {
-    return {
-        fontWeight:
-            personName.indexOf(name) === -1
-                ? theme.typography.fontWeightRegular
-                : theme.typography.fontWeightMedium,
-    };
-}
 
-function SelectUser({ users }) {
+
+function SelectUser({ users, dispatch }) {
     console.log("users are from login select user", users);
     const theme = useTheme();
-    const [personName, setPersonName] = React.useState([]);
+    const [authedUser, setAutheduser] = React.useState("");
 
     const handleChange = (event) => {
         const {
             target: { value },
         } = event;
-        setPersonName(
+        console.log("event.target.value", event.target.value);
+        setAutheduser(
             // On autofill we get a the stringified value.
-            typeof value === 'string' ? value.split(',') : value,
+            { authedUser }
         );
+        dispatch(setAuthedUser(authedUser))
+        console.log(authedUser);
     };
 
     return (
@@ -60,7 +58,7 @@ function SelectUser({ users }) {
             <FormControl sx={{ m: 1, width: 300, mt: 3 }}>
                 <Select
                     displayEmpty
-                    value={personName}
+                    value={authedUser}
                     onChange={handleChange}
                     input={<OutlinedInput />}
                     renderValue={(selected) => {
@@ -68,7 +66,7 @@ function SelectUser({ users }) {
                             return <em>Select user</em>;
                         }
 
-                        return selected.join(', ');
+                        return selected;
                     }}
                     MenuProps={MenuProps}
                     inputProps={{ 'aria-label': 'Without label' }}
@@ -80,7 +78,6 @@ function SelectUser({ users }) {
                         <MenuItem
                             key={usr}
                             value={usr}
-                            style={getStyles(usr, personName, theme)}
                         >
                             {usr}
                         </MenuItem>
