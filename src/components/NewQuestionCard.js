@@ -6,14 +6,15 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import TextField from '@mui/material/TextField';
-import { handleAddQuestion } from '../actions/shared'
-
+import { handleAddQuestion } from '../actions/Questions'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router';
 
 class NewQuestionCard extends Component {
 
     state = {
-        optionOne: '',
-        optionTwo: '',
+        optionOneText: '',
+        optionTwoText: '',
     }
 
     handleOnChange = (e) => {
@@ -24,7 +25,7 @@ class NewQuestionCard extends Component {
     handleAddQuestion = (e) => {
         e.preventDefault()
 
-        const { optionOne: optionOneText, optionTwo: optionTwoText } = this.state
+        const { optionOneText, optionTwoText } = this.state
         const { authedUser: author, dispatch, history } = this.props
 
         dispatch(
@@ -34,10 +35,13 @@ class NewQuestionCard extends Component {
                 author,
             })
         )
+        history.push('/')
     }
     render() {
-        console.log(this.state, "my stttetete");
-        const { optionOne, optionTwo } = this.state
+        // console.log(this.state, "my stttetete");
+        const { optionOneText, optionTwoText } = this.state
+        console.log({ optionOneText, optionTwoText }, "from state to check ");
+
 
 
         return (
@@ -46,7 +50,7 @@ class NewQuestionCard extends Component {
                     <CardMedia
                         component="img"
                         height="140"
-                        image="/static/images/cards/contemplative-reptile.jpg"
+                        image={this.props.users[this.props.authedUser].avatarURL}
                         alt="green iguana"
                     />
                     <CardContent>
@@ -56,19 +60,22 @@ class NewQuestionCard extends Component {
                         <Typography variant="h6" color="text">
                             Would You Rather?
                         </Typography>
-                        <TextField id="optionOne" label="Option 1" variant="standard"
+                        <TextField id="optionOneText" label="Option 1" variant="standard"
+                            value={optionOneText}
                             onChange={this.handleOnChange}
-                            value={optionOne}
+
                         />
-                        <TextField id="optionTwo" label="Option 2" variant="standard"
-                            value={optionTwo}
-                            onChange={this.handleOnChange} />
+                        <TextField id="optionTwoText" label="Option 2" variant="standard"
+                            value={optionTwoText}
+                            onChange={this.handleOnChange}
+                        />
 
                     </CardContent>
                 </CardActionArea>
                 <CardActions>
                     <Button size="Large" color="primary"
-                        onClick={this.handleAddQuestion} >
+                        onClick={this.handleAddQuestion}
+                    >
                         Create
                     </Button>
                 </CardActions>
@@ -76,5 +83,10 @@ class NewQuestionCard extends Component {
         );
     }
 }
-
-export default NewQuestionCard
+const mapStateToProps = ({ users, authedUser }) => {
+    return {
+        users,
+        authedUser
+    }
+}
+export default connect(mapStateToProps)(withRouter(NewQuestionCard))

@@ -10,12 +10,12 @@ export function recieveUsers(users) {
     }
 }
 
-export function userAnswerQuestion({ authedUser, answer, questionId }) {
+export function userAnswerQuestion({ authedUser, answer, qid }) {
     return {
         type: USER_ANSWER_QUESTION,
         authedUser,
         answer,
-        questionId
+        qid
     }
 }
 
@@ -23,6 +23,6 @@ export function userAddQuestion({ authedUser, qid }) {
     return {
         type: USER_ADD_QUESTION,
         authedUser,
-        questionId: qid
+        qid
     }
 }

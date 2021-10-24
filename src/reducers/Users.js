@@ -1,4 +1,4 @@
-import { RECIEVE_USERS, USER_ADD_QUESTION, USER_ANSWER_QUESTION } from "../actions/Users";
+import { RECIEVE_USERS, USER_ADD_QUESTION, USER_ANSWER_QUESTION } from "../actions/users";
 
 
 
@@ -11,33 +11,33 @@ export default function users(state = {}, action) {
                 ...action.users
             }
         case USER_ADD_QUESTION: {
-            const { authedUser, questionId } = action
+            const { authedUser, qid } = action
             return {
                 ...state,
                 [authedUser]: {
                     ...state[authedUser],
-                    questions: [...state[authedUser].questions, questionId]
+                    questions: [...state[authedUser].questions, qid]
                 }
             }
         }
 
         case USER_ANSWER_QUESTION:
             {
-                const { authedUser, answer, questionId, } = state
+                const { authedUser, answer, qid, } = action
                 return {
                     ...state,
                     [authedUser]: {
                         ...state[authedUser],
                         answers: {
                             ...state[authedUser].answers,
-                            [questionId]: answer
+                            [qid]: answer
 
                         }
                     }
                 }
             }
         default:
-            return { ...state }
+            return state
 
     }
 }

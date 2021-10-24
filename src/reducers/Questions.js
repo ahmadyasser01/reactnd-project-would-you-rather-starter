@@ -8,14 +8,14 @@ export default function questions(state = {}, action) {
                 ...action.questions
             }
         case ANSWER_QUESTION:
-            const { questionId, answer, authedUser } = action
-            const SelectedOption = state[questionId][answer]
+            const { qid, answer, authedUser } = action
+            const SelectedOption = state[qid][answer]
             return {
                 ...state,
-                [questionId]: {
-                    ...state[questionId],
+                [qid]: {
+                    ...state[qid],
                     [answer]: {
-                        questionId,
+                        ...SelectedOption,
                         votes: [...SelectedOption.votes,
                             authedUser]
                     }
@@ -24,8 +24,13 @@ export default function questions(state = {}, action) {
             }
         case ADD_QUESTION:
             const { question } = action
+            console.log({
+                ...state,
+                [question.id]: question
+
+            });
             return {
-                ...questions,
+                ...state,
                 [question.id]: question
             }
 

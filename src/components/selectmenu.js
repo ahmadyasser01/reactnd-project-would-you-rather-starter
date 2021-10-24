@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { Component } from 'react';
 import { useTheme } from '@mui/material/styles';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import MenuItem from '@mui/material/MenuItem';
@@ -35,61 +35,69 @@ const names = [
 
 
 
-function SelectUser({ users, dispatch }) {
-    console.log("users are from login select user", users);
-    const theme = useTheme();
-    const [authedUser, setAutheduser] = React.useState("");
-
-    const handleChange = (event) => {
-        const {
-            target: { value },
-        } = event;
-        console.log("event.target.value", event.target.value);
-        setAutheduser(
-            // On autofill we get a the stringified value.
-            { authedUser }
-        );
-        dispatch(setAuthedUser(authedUser))
-        console.log(authedUser);
-    };
-
-    return (
-        <div>
-            <FormControl sx={{ m: 1, width: 300, mt: 3 }}>
-                <Select
-                    displayEmpty
-                    value={authedUser}
-                    onChange={handleChange}
-                    input={<OutlinedInput />}
-                    renderValue={(selected) => {
-                        if (selected.length === 0) {
-                            return <em>Select user</em>;
-                        }
-
-                        return selected;
-                    }}
-                    MenuProps={MenuProps}
-                    inputProps={{ 'aria-label': 'Without label' }}
-                >
-                    <MenuItem disabled value="">
-                        <em>Users</em>
-                    </MenuItem>
-                    {users.map((usr) => (
-                        <MenuItem
-                            key={usr}
-                            value={usr}
-                        >
-                            {usr}
-                        </MenuItem>
-                    ))}
-                </Select>
-            </FormControl>
-        </div>
-    );
-}
-function mapStateToProps({ users }) {
-    return {
-        users: Object.keys(users)
+class SelectUser extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            authedUser: '',
+        }
+        this.handleChange = this.handleChange.bind(this)
     }
+    handleChange(event) {
+        event.preventDefault();
+        this.setState({ authedUser: event.target.value })
+        this.props.dispatch(setAuthedUser(event.target.value))
+    }
+
+    render() {
+        const { authedUser } = this.state;
+        const { users, dispatch } = this.props;
+        const usrsarry = Object.values(users)
+        return (
+            <div>
+                <FormControl sx={{ m: 1, width: 300, mt: 3 }}>
+                    <Select
+                        displayEmpty
+                        value={authedUser}
+                        onChange={this.handleChange}
+                        input={<OutlinedInput />}
+                        renderValue={(selected) => {
+                            if (selected.length === 0) {
+                                return <em>Select user</em>;
+                            }
+
+                            return selected;
+                        }}
+                        MenuProps={MenuProps}
+                        inputProps={{ 'aria-label': 'Without label' }}
+                    >
+                        <MenuItem disabled value="">
+                            <em>Users</em>
+                        </MenuItem>
+                        {usrsarry && usrsarry.map((usr) => (
+                            <MenuItem
+                                key={usr.id}
+                                value={usr.id}
+                            >
+                                {usr.name}
+                            </MenuItem>
+                        ))}
+
+                    </Select>
+
+                </FormControl>
+            </div>
+        )
+    }
+
 }
-export default connect(mapStateToProps)(SelectUser)
+
+
+
+
+
+
+
+
+
+export default connect()(SelectUser)

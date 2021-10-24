@@ -1,22 +1,15 @@
 import React, { Component } from "react";
-import Header from "../components/nav";
-import NewQuestionCard from "../components/NewQuestionCard";
-import { connect } from 'react-redux'
-class Newquestion extends Component {
-
+import NewQuestionCard from '../components/NewQuestionCard'
+import Header from '../components/nav'
+class NewQuestion extends Component {
     render() {
         return (
             <>
                 <Header />
-                <NewQuestionCard dispatch={this.props.dispatch} authedUser={this.props.authedUser} />
+                <NewQuestionCard />
             </>
         )
     }
 }
-const mapStateToProps = ({ authedUser, users }) => {
-    return {
-        users,
-        authedUser
-    }
-}
-export default connect(mapStateToProps)(Newquestion)
+
+export default NewQuestion

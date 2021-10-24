@@ -1,50 +1,43 @@
+import { Component } from 'react';
+import { handleInitialData } from './actions/shared';
 import './App.css';
-import Login from './screens/Login'
-// import Home from './screens/Home'
-// import Newquestion from './screens/NewQuestion';
-import Leaderboard from './screens/Leaderboard';
-import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { handleInitialData } from './actions/shared'
-import LoadingBar from 'react-redux-loading'
-import authedUser from './reducers/authedUser';
-import Home from './screens/Home';
-import Newquestion from './screens/NewQuestion'
-// import { Leaderboard } from '@mui/icons-material';
+import Login from './screens/Login';
+import PrivateRoute from './privateRoute'
+import Main from './components/main'
+import { Route, Switch } from 'react-router-dom'
+
 class App extends Component {
 
   componentDidMount() {
     this.props.dispatch(handleInitialData())
-    console.log(authedUser);
   }
+
 
   render() {
-    const { loading } = this.props
-    console.log(loading);
+    const { authedUser } = this.props
+    console.log("check authed", authedUser)
+
     return (
-      <div className="App" >
-        <LoadingBar />
-        {this.props.loading === true
-          ? null
-          : <Leaderboard />}
+      <div className="App">
+        <Switch>
+          <Route exact path="/login"
+            name="Login"
+            render={(props) => <Login {...props} />}>
 
-      </div>
+          </Route>
+
+          <PrivateRoute path="/" component={Main}></PrivateRoute>
+
+
+        </Switch>
+      </div >
     );
-
-
   }
 }
-function mapStateToProps({ authedUser, users, questions }) {
-  console.log(users, "mapstate")
+const mapStateToProps = ({ authedUser }) => {
   return {
-    loading: users === // because Object.keys(new Date()).length === 0;
-      // we have to do some additional check
-      null // 👈 null and undefined check
-      && Object.keys(users).length === 0
-      && Object.getPrototypeOf(users) === Object.prototype,
-    authedUser,
-
-
+    authedUser
   }
 }
 export default connect(mapStateToProps)(App);
