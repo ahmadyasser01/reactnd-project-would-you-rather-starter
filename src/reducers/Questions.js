@@ -24,11 +24,7 @@ export default function questions(state = {}, action) {
             }
         case ADD_QUESTION:
             const { question } = action
-            console.log({
-                ...state,
-                [question.id]: question
 
-            });
             return {
                 ...state,
                 [question.id]: question

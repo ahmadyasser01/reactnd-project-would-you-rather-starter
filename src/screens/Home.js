@@ -58,7 +58,6 @@ class Home extends Component {
     render() {
         const { value } = this.state
         const { users, questions, authedUser } = this.props
-        console.log(authedUser)
         const formattedQuestions = questions.sort(sortBy("-timestamp")).map(question => {
             return {
                 ...question,
@@ -72,7 +71,6 @@ class Home extends Component {
 
         )
         const unAnsweredQuestions = formattedQuestions.filter(q => {
-            console.log("qq", q)
             return (
                 !q.optionOne.votes.includes(authedUser) && !q.optionTwo.votes.includes(authedUser)
             )

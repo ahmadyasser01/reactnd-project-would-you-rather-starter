@@ -9,7 +9,6 @@ class Question extends Component {
 
     render() {
         const { id, author, optionOne, optionTwo, avatarURL } = this.props.question;
-        console.log(this.props.question);
         return (
             <div>
                 <Card sx={{ maxWidth: 345 }}>

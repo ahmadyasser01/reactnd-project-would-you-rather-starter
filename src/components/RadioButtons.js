@@ -8,7 +8,6 @@ import Button from '@mui/material/Button';
 import { handleAnswerQuestion } from '../actions/Questions';
 
 export default function ErrorRadios({ question, authedUser, dispatch }) {
-    console.log(question, "from radio");
     const [value, setValue] = React.useState('');
     const [helperText, setHelperText] = React.useState('Choose wisely');
 

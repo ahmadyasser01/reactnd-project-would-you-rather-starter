@@ -16,7 +16,6 @@ const Main = () => {
             <Route exact path="/" component={Home} />
             <Route exact path="/new" component={NewQuestion} />
             <Route exact path="/leaderboard" component={Leaderboard} />
-            {/* //page not found  */}
             <Route exact path="/question/:id" component={questionRoute}></Route>
             <Route path="/notfound" component={NotFound}></Route>
 

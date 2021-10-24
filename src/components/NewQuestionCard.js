@@ -38,9 +38,7 @@ class NewQuestionCard extends Component {
         history.push('/')
     }
     render() {
-        // console.log(this.state, "my stttetete");
         const { optionOneText, optionTwoText } = this.state
-        console.log({ optionOneText, optionTwoText }, "from state to check ");
 
 
 

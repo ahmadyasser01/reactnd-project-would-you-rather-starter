@@ -12,7 +12,6 @@ class Leaderboard extends Component {
 
     render() {
         const { users } = this.props
-        console.log(users)
         return (
             <>
                 <Header></Header>

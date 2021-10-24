@@ -10,7 +10,6 @@ import { connect } from 'react-redux'
 class UnAnsweredQuestion extends Component {
     render() {
         const { avatarURL, author } = this.props.question
-        console.log(this.props.question, "check question from unanswereds")
 
 
         return (

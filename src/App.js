@@ -15,8 +15,6 @@ class App extends Component {
 
 
   render() {
-    const { authedUser } = this.props
-    console.log("check authed", authedUser)
 
     return (
       <div className="App">

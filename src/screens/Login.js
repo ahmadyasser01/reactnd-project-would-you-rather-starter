@@ -22,7 +22,6 @@ class Login extends Component {
     render() {
         const { authedUser } = this.state
         const { users } = this.props
-        console.log(users, "this is ussers line 20 login")
         return (
             <Container maxWidth="sm">
                 <img
@@ -47,7 +46,6 @@ class Login extends Component {
                         label="Age"
                         onChange={this.handleChange}
                     >
-                        {console.log(Object.values, "line 47 ")}
                         {users && Object.values(users).map(user => (
                             <MenuItem value={user.id} key={user.id}>{user.name}</MenuItem>
                         ))}
@@ -61,13 +59,12 @@ class Login extends Component {
                         onClick={(e) => {
                             e.preventDefault();
                             if (this.state.authedUser) {
-                                console.log("signed in")
                                 localStorage.setItem('authedUser', this.state.authedUser);
                                 this.props.history.push('/')
 
                             }
                             else {
-                                alert("please sign in ")
+                                alert("please sign in to play ")
                             }
                         }}
                     >

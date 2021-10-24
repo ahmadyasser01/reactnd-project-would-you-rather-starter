@@ -11,14 +11,12 @@ import Divider from '@mui/material/Divider';
 class AnsweredQuestion extends Component {
     render() {
         const { avatarURL, author, optionOne, optionTwo } = this.props.question
-        console.log(author, "is author");
         const optionOneVotes = optionOne.votes.length;
         const optionTwoVotes = optionTwo.votes.length;
         const total = optionOneVotes + optionTwoVotes;
-        const optionOneVotesPercentage = Math.round(optionOneVotes / total * 10000 / 100)
-        const optionTwoVotesPercentage = Math.round(optionTwoVotes / total * 10000 / 100)
-        console.log(optionOneVotesPercentage, optionTwoVotesPercentage);
-        console.log(optionOne.text, optionTwo.text, "this is the text ")
+        const optionOneVotesPercentage = Math.round(optionOneVotes / total * 10000) / 100
+        const optionTwoVotesPercentage = Math.round(optionTwoVotes / total * 10000) / 100
+        // console.log(optionOneVotesPercentage, optionTwoVotesPercentage);
 
         return (
             <div>
