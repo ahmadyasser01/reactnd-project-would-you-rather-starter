@@ -11,6 +11,7 @@ import Divider from '@mui/material/Divider';
 class AnsweredQuestion extends Component {
     render() {
         const { avatarURL, author, optionOne, optionTwo } = this.props.question
+        const { authedUser } = this.props
         const optionOneVotes = optionOne.votes.length;
         const optionTwoVotes = optionTwo.votes.length;
         const total = optionOneVotes + optionTwoVotes;
@@ -32,14 +33,24 @@ class AnsweredQuestion extends Component {
                         <Typography gutterBottom variant="h5" component="div">
                             {author} asks Would You rather
                         </Typography>
-                        <Typography variant="body2" color="text.secondary">
+                        <Typography variant="h5" color="text.primary">
                             {optionOne.text}
                         </Typography>
+                        <span>{optionOne.votes.includes(authedUser) && "[you selected this answer]"}</span>
+
+                        <Typography variant="body2" color="text.secondary">
+                            {optionOneVotes} choosed this option from {total} with perctentage {optionOneVotesPercentage}%
+                        </Typography>
+
                         <LinearProgress variant="determinate" value={optionOneVotesPercentage} />
                         <Divider middle="true" />
                         <Divider />
-                        <Typography variant="body2" color="text.secondary">
+                        <Typography variant="h5" color="text.primary">
                             {optionTwo.text}
+                        </Typography>
+                        <span> {optionTwo.votes.includes(authedUser) && "[you selected this answer]"}</span>
+                        <Typography variant="body2" color="text.secondary">
+                            {optionTwoVotes} choosed this option from {total} with perctentage {optionTwoVotesPercentage}%
                         </Typography>
 
                         <LinearProgress variant="determinate" value={optionTwoVotesPercentage} />

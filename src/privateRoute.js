@@ -1,9 +1,11 @@
 import React from 'react'
 import { Redirect, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
-
-
-const PrivateRoute = ({ authedUser, path, component: Component, exact }) => {
+import { useLocation } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
+const PrivateRoute = ({ authedUser, path, component: Component }) => {
+    const location = useLocation();
+    console.log(location, "location target")
     return (
         <Route render={(props) =>
             authedUser ? (
@@ -12,7 +14,7 @@ const PrivateRoute = ({ authedUser, path, component: Component, exact }) => {
                 <Redirect
                     to={{
                         pathname: '/login',
-                        state: { from: props.location },
+                        state: { from: location },
                     }}
                 />)} />
     )
@@ -24,4 +26,4 @@ const mapStateToProps = ({ authedUser }) => {
     }
 }
 
-export default connect(mapStateToProps)(PrivateRoute)
+export default connect(mapStateToProps)(withRouter(PrivateRoute))

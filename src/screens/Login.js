@@ -8,11 +8,12 @@ import Select from '@mui/material/Select';
 import { connect } from 'react-redux'
 import { setAuthedUser } from '../actions/authedUser'
 import Button from "@mui/material/Button"
-import { withRouter } from 'react-router-dom'
+import { withRouter, Redirect } from 'react-router-dom'
 
 class Login extends Component {
     state = {
-        authedUser: ""
+        authedUser: "",
+        checkRedirect: false
     }
     handleChange = (event) => {
         this.setState({ authedUser: event.target.value })
@@ -22,6 +23,15 @@ class Login extends Component {
     render() {
         const { authedUser } = this.state
         const { users } = this.props
+        const { location, } = this.props
+
+        console.log(location, "from login");
+        if (this.state.checkRedirect) {
+            return (
+                <Redirect to={location.state?.from || '/'} />
+
+            )
+        }
         return (
             <Container maxWidth="sm">
                 <img
@@ -59,9 +69,8 @@ class Login extends Component {
                         onClick={(e) => {
                             e.preventDefault();
                             if (this.state.authedUser) {
-                                localStorage.setItem('authedUser', this.state.authedUser);
-                                this.props.history.push('/')
 
+                                this.setState({ checkRedirect: true })
                             }
                             else {
                                 alert("please sign in to play ")

@@ -21,7 +21,7 @@ function Header({ history, dispatch, authedUser, users }) {
                     <Link to={"/"}>
                         <Button color="inherit">Home</Button>
                     </Link>
-                    <Link to={"/new"}>
+                    <Link to={"/add"}>
                         <Button color="inherit">New Question</Button>
                     </Link>
                     <Link to={"/leaderboard"}>

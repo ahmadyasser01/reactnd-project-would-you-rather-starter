@@ -14,10 +14,10 @@ const Main = () => {
         <Switch>
 
             <Route exact path="/" component={Home} />
-            <Route exact path="/new" component={NewQuestion} />
+            <Route exact path="/add" component={NewQuestion} />
             <Route exact path="/leaderboard" component={Leaderboard} />
-            <Route exact path="/question/:id" component={questionRoute}></Route>
-            <Route path="/notfound" component={NotFound}></Route>
+            <Route exact path="/questions/:id" component={questionRoute}></Route>
+            <Route path="/404" component={NotFound}></Route>
 
 
         </Switch>
