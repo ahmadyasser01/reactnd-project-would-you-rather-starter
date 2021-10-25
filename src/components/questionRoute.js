@@ -12,10 +12,10 @@ class QuestionRoute extends Component {
         const qId = match.params.id
         const question = questions[qId]
 
-        if (!question) {
+        if (question === undefined) {
             history.push('/404')
+            return null
         }
-        console.log(questions);
         question.avatarURL = users[question.author].avatarURL;
         const isAnswered = question.optionOne.votes.includes(authedUser) || question.optionTwo.votes.includes(authedUser)
         return isAnswered ? (<AnsweredQuestion question={question} authedUser={authedUser} />) : (<UnAnsweredQuestion question={question} />)

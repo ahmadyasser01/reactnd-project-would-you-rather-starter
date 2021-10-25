@@ -5,7 +5,6 @@ import { useLocation } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
 const PrivateRoute = ({ authedUser, path, component: Component }) => {
     const location = useLocation();
-    console.log(location, "location target")
     return (
         <Route render={(props) =>
             authedUser ? (

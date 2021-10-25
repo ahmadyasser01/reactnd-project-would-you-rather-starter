@@ -25,7 +25,6 @@ class Login extends Component {
         const { users } = this.props
         const { location, } = this.props
 
-        console.log(location, "from login");
         if (this.state.checkRedirect) {
             return (
                 <Redirect to={location.state?.from || '/'} />
