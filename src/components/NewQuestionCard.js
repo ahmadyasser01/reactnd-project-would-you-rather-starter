@@ -72,7 +72,9 @@ class NewQuestionCard extends Component {
                 </CardActionArea>
                 <CardActions>
                     <Button size="Large" color="primary"
+                        disabled={!optionOneText || !optionTwoText}
                         onClick={this.handleAddQuestion}
+
                     >
                         Create
                     </Button>
